@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
+  </head>
+  <body>
+ <div>
+   <div id="menuIcon">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+    <div class="menu-box" id="menuBox">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Causes.html">Causes</a></li>
+            <li><a href="Prevention.html">Prevention</a></li>
+            <li><a href="climate.html">Earth's Pulse</a></li>
+            <li><a href="Feedback.html">Feedback</a></li>
+        </ul>
+    </div>
+  <section class="hero-section">
+    <div class="logo-container">
+    <img src="Images/logo.png" style="height: 120px; width: 325px;"></div>
+    <img src="Images/CLIMATE CHANGE.gif" class="hero-image" />
+  </section>
+
+  <section class="content-section">
+    <p class="text-bg">Your Choice, Our Future:Prevent climate change, and the Earth thrives. Ignore it, and watch it face destruction. Toggle to see the impact—every action matters, and the planet's fate is in your hands!</p>
+
+		<div class="cycle-type-container">
+			<div class="cycle-type-check-box">
+				<input type="checkbox" id="toggle" class="cycle-type-input" />
+				<div class="cycle-type-label">
+					<label for="toggle" class="cycle-type-toggle"></label>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+    let menuBox = document.getElementById("menuBox");
+    let menuIcon = document.getElementById("menuIcon");
+
+    menuIcon.onclick = function() {
+        menuBox.classList.toggle("open-menu");
+        menuIcon.classList.toggle("open-menu");
+    };
+</script>
+<script type="text/javascript">
+    const toggle = document.getElementById("toggle");
+    const contentSection = document.querySelector(".content-section");
+
+    // Add an event listener to the toggle checkbox
+    toggle.addEventListener("change", function () {
+        if (toggle.checked) {
+            // When toggle is checked (ON), set the "destroyed Earth" background image
+            contentSection.style.backgroundImage = "url('Images/dead.png')";
+            console.log("Toggle ON: Destroyed Earth background displayed");
+        } else {
+            // When toggle is unchecked (OFF), set the "good Earth" background image
+            contentSection.style.backgroundImage = "url('Images/green.png')";
+            console.log("Toggle OFF: Good Earth background displayed");
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,255 @@
+/* General Reset */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('Images/pulse.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+/* Hamburger Menu */
+#menuIcon {
+  cursor: pointer;
+  width: 60px;
+  border-radius: 50%;
+  position: fixed;
+  top: 40px;
+  right: 60px;
+  z-index: 1001;
+}
+
+#menuIcon .bar {
+  display: block;
+  width: 45px;
+  height: 4.5px;
+  margin: 7.5px auto;
+  background-color: black;
+  transition: 0.3s;
+}
+
+#menuIcon.open-menu .bar:nth-child(1) {
+  transform: rotate(45deg) translate(7.5px, 7.5px);
+}
+
+#menuIcon.open-menu .bar:nth-child(2) {
+  opacity: 0;
+}
+
+#menuIcon.open-menu .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(10.5px, -9px);
+}
+
+/* Menu Box */
+.menu-box {
+  width: 0;
+  height: 0;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-bottom-left-radius: 100%;
+  transition: width 0.5s, height 0.5s, border-radius 0.5s;
+}
+
+.menu-box.open-menu {
+  width: 100%;
+  height: 100vh;
+  border-bottom-left-radius: 0;
+}
+
+.menu-box ul li {
+  list-style: none;
+  margin: 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  text-align: center;
+}
+
+.menu-box.open-menu ul li {
+  opacity: 1;
+  transform: translateY(0);
+  transition: transform 1s, opacity 1s;
+  transition-delay: 0.5s;
+}
+
+.menu-box ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 50px;
+  font-weight: 600;
+  position: relative;
+  text-shadow: 0 0 0 gray;
+  transition: text-shadow 0.5s, transform 0.5s;
+}
+
+.menu-box ul li a:hover {
+  text-shadow: -3px 3px 0 gray;
+  transform: translateY(-6px);
+}
+
+.menu-box ul li a::after {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  position: absolute;
+  bottom: 19px;
+  right: -18px;
+  opacity: 0;
+  box-shadow: 0 0 0 grey;
+  transition: box-shadow 0.5s;
+}
+
+.menu-box ul li a:hover::after {
+  opacity: 1;
+  box-shadow: -2px 2px 0 grey;
+}
+
+/* Weather Section */
+.weather-container {
+  width: 90%;
+  max-width: 1550px;
+  margin: 60px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.search-box input {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.search-box button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.current-weather {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-details {
+  font-size: 18px;
+}
+
+#weather-icon {
+  width: 200px;
+  height: 200px;
+}
+
+.forecast {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.forecast-day {
+  width: 120px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Carbon Footprint Calculator */
+.carbon-container {
+  margin: 60px auto;
+}
+
+.container {
+  width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+
+input, button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+button {
+  background-color: green;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: darkgreen;
+}
+.tree-game-container {
+  text-align: center;
+  margin: 60px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  max-width: 1400px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#land {
+  width: 100%;
+  height: 300px;
+  background: url('Images/land.jpg') no-repeat center;
+  background-size: cover;
+  position: relative;
+  border: 2px solid green;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.tree {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: url('Images/trees.gif') no-repeat center center;
+  background-size: contain;
+  animation: popUp 0.3s ease;
+}
+
+@keyframes popUp {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.forecast-day img {
+  width: 50px;  /* Adjust based on your preferred size */
+  height: auto; /* Maintain aspect ratio */
+}

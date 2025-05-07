@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <title>Feedback</title>
+    <link rel="stylesheet" href="FeedbackStyles.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+</head>
+<body>
+    <div>
+        <div id="menuIcon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="menu-box" id="menuBox">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="About.html">About</a></li>
+                <li><a href="Causes.html">Causes</a></li>
+                <li><a href="Prevention.html">Prevention</a></li>
+                <li><a href="climate.html">Earth's Pulse</a></li>
+                <li><a href="Feedback.html">Feedback</a></li>
+            </ul>
+        </div>
+
+        <div style="margin-top: 100px; text-align: center;">
+            <h1 style="font-size: 70px; font-weight: bold; color: #264d00;">Feedback</h1>
+        </div>
+
+        <div class="container">
+<div class="feedbackbox">
+    <div class="feedback-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required placeholder="Enter your name"><br><br><br>
+    </div>
+    <div class="emoji">
+        <div id="emoji">
+            <img src="Images/poor.png">
+            <img src="Images/bad.png">
+            <img src="Images/okay.png">
+            <img src="Images/good.png">
+            <img src="Images/excellent.png">
+        </div>
+    </div>
+
+    <div class="rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+    </div>
+
+    <br>
+    <div class="feedback-form">
+        <label for="message">Kindly take a moment to tell us what you think?</label><br>
+        <textarea id="message" name="message" required placeholder="Enter your message"></textarea>
+    </div>
+
+    <div>
+        <br><br>
+        <a href="thnk.html">
+            <button class="button" id="submitBtn">Submit</button>
+        </a>
+    </div>
+</div>
+<script>
+// Handle rating selection & emoji movement
+var stars = document.getElementsByClassName("fas");
+var emoji = document.getElementById("emoji");
+
+stars[0].onclick = function() { selectRating(0, 0); };
+stars[1].onclick = function() { selectRating(1, -100); };
+stars[2].onclick = function() { selectRating(2, -200); };
+stars[3].onclick = function() { selectRating(3, -300); };
+stars[4].onclick = function() { selectRating(4, -400); };
+
+function selectRating(index, translateValue) {
+    for (let i = 0; i < stars.length; i++) {
+        stars[i].style.color = i <= index ? "#ffd93b" : "#e4e4e4";
+    }
+    emoji.style.transform = `translateX(${translateValue}px)`;
+}
+
+// Capture name & message input on submit
+document.getElementById("submitBtn").addEventListener("click", function() {
+    let userName = document.getElementById("name").value;
+    let userMessage = document.getElementById("message").value;
+
+    console.log("Name:", userName);
+    console.log("Message:", userMessage);
+});
+</script>
+
+<script type="text/javascript">
+    let menuBox = document.getElementById("menuBox");
+    let menuIcon = document.getElementById("menuIcon");
+
+    menuIcon.onclick = function() {
+        menuBox.classList.toggle("open-menu");
+        menuIcon.classList.toggle("open-menu");
+    };
+</script><br>
+</body>
+</html>

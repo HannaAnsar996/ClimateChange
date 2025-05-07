@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="cause.css">
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://cdpn.io/cpe/boomboom/pen.js?key=pen.js-490c3305-5088-be9b-5520-f30d9342e833" crossorigin=""></script>
+  <title>Causes</title>
+</head>
+<body>
+  <div class="container">
+<div class="container">
+  <div id="menuIcon">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="menu-box" id="menuBox">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Causes.html">Causes</a></li>
+      <li><a href="Prevention.html">Prevention</a></li>
+      <li><a href="climate.html">Earth's Pulse</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </div>
+</div>
+<script>
+  let menuBox = document.getElementById("menuBox");
+  let menuIcon = document.getElementById("menuIcon");
+
+  menuIcon.onclick = function() {
+    menuBox.classList.toggle("open-menu");
+    menuIcon.classList.toggle("open-menu");
+  };
+</script>
+<div class="slider__warpper">
+  <div class="flex__container flex--gbwarm flex--active" data-slide="1">
+    <div class="flex__item flex__item--left">
+      <div class="flex__content">
+        <p class="text--sub">Cause I</p>
+        <h1 class="text--big">Global Warming</h1>
+        <p class="text--normal">Global Warming is definitely the single greatest environmental challenge that the planet earth is facing at present. It is essential to understand the gravity of the situation.Global warming is melting our ice glaciers rapidly.This is extremely harmful to the earth.</p>
+      </div>
+      <p class="text__background">Global Warming</p>
+    </div>
+    <div class="flex__item flex__item--right"></div>
+    <img class="cause__img" src="Images/warm.gif"/>
+  </div>
+
+  <div class="flex__container flex--deforestation animate--start" data-slide="2">
+    <div class="flex__item flex__item--left">
+      <div class="flex__content">
+        <p class="text--sub">Cause II</p>
+        <h1 class="text--big">Deforestation</h1>
+        <p class="text--normal">Deforestation or forest clearance is the removal of a forest or stand of trees from land that is then converted to non-forest use. Deforestation can involve conversion of forest land to farms, ranches, or urban use. The most concentrated deforestation occurs in tropical rainforests.</p>
+      </div>
+      <p class="text__background">Deforestation</p>
+    </div>
+
+    <div class="flex__item flex__item--right"></div>
+    <img class="cause__img" src="Images/def.gif"/>
+  </div>
+
+  <div class="flex__container flex--population animate--start" data-slide="3">
+    <div class="flex__item flex__item--left">
+      <div class="flex__content">
+        <p class="text--sub">Cause III</p>
+        <h1 class="text--big">Increase in<br> Population</h1>
+        <p class="text--normal">More people means an increased demand for food, water, housing, energy, healthcare, transportation, and more. And all that consumption contributes to ecological degradation, increased conflicts, and a higher risk of large-scale disasters like pandemics.</p>
+      </div>
+      <p class="text__background">Increase in Population</p>
+    </div>
+    <div class="flex__item flex__item--right"></div>
+    <img class="cause__img" src="Images/pop.gif">
+  </div>
+
+  <div class="flex__container flex--industrialization animate--start" data-slide="4">
+    <div class="flex__item flex__item--left">
+      <div class="flex__content">
+        <p class="text--sub">Causes IV</p>
+        <h1 class="text--big">Industrialization</h1>
+        <p class="text--normal">Industrialisation is the period of social and economic change that transforms a human group from an agrarian society into an industrial society. This involves an extensive re-organisation of an economy for the purpose of manufacturing.
+
+</p>
+      </div>
+      <p class="text__background">Industrialization</p></div>
+      <div class="flex__item flex__item--right"></div>
+    <img class="cause__img" src="Images/insudtry.gif">
+</div>
+<div class="slider__navi">
+  <a href="#" class="slide-nav active" data-slide="1">Global Warming</a>
+  <a href="#" class="slide-nav" data-slide="2">Deforestation</a>
+  <a href="#" class="slide-nav" data-slide="3">Increase in Population</a>
+  <a href="#" class="slide-nav" data-slide="4">Industrialization</a>
+</div>
+<script type="text/javascript">
+  $('.slide-nav').on('click', function(e) {
+  e.preventDefault();
+  // get current slide
+  var current = $('.flex--active').data('slide'),
+    // get button data-slide
+    next = $(this).data('slide');
+
+  $('.slide-nav').removeClass('active');
+  $(this).addClass('active');
+
+  if (current === next) {
+    return false;
+  } else {
+    $('.slider__warpper').find('.flex__container[data-slide=' + next + ']').addClass('flex--preStart');
+    $('.flex--active').addClass('animate--end');
+    setTimeout(function() {
+      $('.flex--preStart').removeClass('animate--start flex--preStart').addClass('flex--active');
+      $('.animate--end').addClass('animate--start').removeClass('animate--end flex--active');
+    }, 800);
+  }
+});
+
+</script>
+</body>
+</html>
