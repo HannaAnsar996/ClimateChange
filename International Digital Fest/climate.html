@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Climate Change</title>
+  <link rel="icon" href="Images/nature.jpg">
+  <link rel="stylesheet" type="text/css" href="climate.css">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+</head>
+<body>
+
+  <!-- Hamburger Menu -->
+  <div id="menuIcon" class="no-animation">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="menu-box" id="menuBox">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Causes.html">Causes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="Prevention.html">Prevention</a></li>
+      <li><a href="climate.html">Earth's Pulse</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </div>
+
+  <!-- Weather Forecast Section -->
+  <div class="weather-container">
+    <h2>Live Weather Forecast</h2>
+    <div class="search-box">
+      <input type="text" placeholder="Enter city name" id="city-input">
+      <button id="search-btn" style="width: 150px;">Search</button>
+    </div>
+
+    <div class="current-weather">
+      <h1 id="city-name">Dubai</h1>
+      <img id="weather-icon" src="images/sun.gif" alt="Weather Icon">
+      <div class="weather-details">
+        <p><strong>Temp:</strong> <span id="temperature">36</span>°C</p>
+        <p><strong>Humidity:</strong> <span id="humidity">41</span>%</p>
+        <p><strong>Wind:</strong> <span id="wind-speed">8.75</span> km/h</p>
+      </div>
+    </div>
+
+    <div class="forecast" id="forecast-container"></div>
+  </div>
+
+  <!-- Carbon Footprint Section -->
+  <div class="carbon-container">
+    <div class="container">
+      <h1>Carbon Footprint Calculator</h1>
+      <form id="calculator">
+        <label for="electricity">Electricity (kWh/month):</label>
+        <input type="number" id="electricity" required style=" width: 470px;">
+
+        <label for="car">Car Travel (km/week):</label>
+        <input type="number" id="car" required style=" width: 470px;">
+
+        <label for="flights">Flights (per year):</label>
+        <input type="number" id="flights" required style=" width: 470px;">
+
+        <button type="button" onclick="calculateFootprint()">Calculate</button>
+      </form>
+      <div id="result"></div>
+    </div>
+  </div>
+<div class="tree-game-container">
+  <h2>🌳 Grow a Tree & Boost Oxygen!</h2>
+  <p id="oxygen-level">Oxygen Level: 0%</p>
+  <div id="land" class="land"></div>
+  <button onclick="resetGame()">Reset</button>
+</div>
+  <!-- Scripts -->
+  <script>
+    // Menu toggle
+    const menuBox = document.getElementById("menuBox");
+    const menuIcon = document.getElementById("menuIcon");
+
+    menuIcon.onclick = function () {
+      menuBox.classList.toggle("open-menu");
+      menuIcon.classList.toggle("open-menu");
+    };
+
+    // Weather fetch
+    const apiKey = "f9a6f2cea1e78bf84a00090e1621e721";
+    const apiUrlWeather = "https://api.openweathermap.org/data/2.5/weather";
+    const apiUrlForecast = "https://api.openweathermap.org/data/2.5/forecast";
+
+    const searchBox = document.querySelector("#city-input");
+    const searchBtn = document.querySelector("#search-btn");
+    const cityName = document.querySelector("#city-name");
+    const weatherIcon = document.querySelector("#weather-icon");
+    const temperature = document.querySelector("#temperature");
+    const humidity = document.querySelector("#humidity");
+    const windSpeed = document.querySelector("#wind-speed");
+    const forecastContainer = document.querySelector("#forecast-container");
+
+    async function fetchWeather(city) {
+      try {
+        const response = await fetch(`${apiUrlWeather}?q=${city}&appid=${apiKey}&units=metric`);
+        if (!response.ok) throw new Error("City not found!");
+        const data = await response.json();
+
+        cityName.innerText = data.name;
+        temperature.innerText = Math.round(data.main.temp);
+        humidity.innerText = data.main.humidity;
+        windSpeed.innerText = data.wind.speed;
+
+        const weatherCondition = data.weather[0].main.toLowerCase();
+        const currentTime = Math.floor(Date.now() / 1000);
+        const sunsetTime = data.sys.sunset;
+        const isNight = currentTime > sunsetTime;
+
+        const gifMap = {
+          "clear": isNight ? "images/moon.gif" : "images/sun.gif",
+          "clouds": isNight ? "images/cloudymoon.gif" : "images/cloud.gif",
+          "rain": "images/rain.gif",
+          "snow": "images/snow.gif",
+          "thunderstorm": "images/thunder.gif",
+          "wind": "images/windy.gif"
+        };
+
+        weatherIcon.src = gifMap[weatherCondition] || "images/default.gif";
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function fetchForecast(city) {
+      try {
+        const response = await fetch(`${apiUrlForecast}?q=${city}&appid=${apiKey}&units=metric`);
+        if (!response.ok) throw new Error("City not found!");
+        const data = await response.json();
+
+        forecastContainer.innerHTML = "";
+        let forecastDays = {};
+
+        data.list.forEach(item => {
+          const date = item.dt_txt.split(" ")[0];
+          const dayName = new Date(date).toLocaleDateString("en-US", { weekday: "long" });
+
+          if (!forecastDays[dayName]) {
+            forecastDays[dayName] = {
+              temp: Math.round(item.main.temp),
+              weather: item.weather[0].main,
+              icon: item.weather[0].icon
+            };
+          }
+        });
+
+const forecastGifMap = {
+  "Clear": "images/sun.gif",
+  "Clouds": "images/cloud.gif",
+  "Rain": "images/rain.gif",
+  "Snow": "images/snow.gif",
+  "Thunderstorm": "images/thunder.gif",
+  "Wind": "images/windy.gif"
+};
+
+for (const day in forecastDays) {
+  forecastContainer.innerHTML += `
+    <div class="forecast-day">
+      <h3>${day}</h3>
+      <img src="${forecastGifMap[forecastDays[day].weather] || 'images/default.gif'}" alt="Weather Icon">
+      <p>${forecastDays[day].weather}</p>
+      <p>${forecastDays[day].temp}°C</p>
+    </div>
+  `;
+}
+
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    searchBtn.addEventListener("click", () => {
+      const city = searchBox.value;
+      fetchWeather(city);
+      fetchForecast(city);
+    });
+
+    searchBox.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const city = searchBox.value;
+        fetchWeather(city);
+        fetchForecast(city);
+      }
+    });
+
+    // Default on load
+    fetchWeather("Dubai");
+    fetchForecast("Dubai");
+
+    function calculateFootprint() {
+      const electricity = parseFloat(document.getElementById("electricity").value) * 0.5;
+      const car = parseFloat(document.getElementById("car").value) * 0.2;
+      const flights = parseFloat(document.getElementById("flights").value) * 500;
+
+      if (isNaN(electricity) || isNaN(car) || isNaN(flights)) {
+        document.getElementById("result").innerHTML = "Please enter valid values.";
+        return;
+      }
+
+      const total = electricity + car + flights;
+      document.getElementById("result").innerHTML = `Your estimated carbon footprint is <strong>${total.toFixed(2)}</strong> kg CO₂ per year.`;
+    }
+
+let oxygen = 0;
+const land = document.getElementById("land");
+const oxygenText = document.getElementById("oxygen-level");
+
+land.addEventListener("click", function (e) {
+  const rect = land.getBoundingClientRect();
+  const y = e.clientY - rect.top;
+
+  // Only allow planting in the bottom 40% of the land area
+  if (y < rect.height * 0.6) {
+    return; // Don't grow a tree in the sky
+  }
+
+  const tree = document.createElement("div");
+  tree.classList.add("tree");
+
+  const x = e.clientX - rect.left - 25;
+  tree.style.left = `${x}px`;
+  tree.style.top = `${y - 70}px`; // Adjust tree position above cursor
+
+  land.appendChild(tree);
+
+  oxygen += 2;
+  if (oxygen > 100) oxygen = 100;
+  oxygenText.innerText = `Oxygen Level: ${oxygen}%`;
+});
+
+function resetGame() {
+  land.innerHTML = "";
+  oxygen = 0;
+  oxygenText.innerText = "Oxygen Level: 0%";
+}
+
+  </script>
+  <div class="container">
+        <h1>Global Temperature Anomalies (1880-2100)</h1>
+        
+        <div class="controls">
+            <button id="low-btn" class="scenario-btn active">Low Emissions</button>
+            <button id="moderate-btn" class="scenario-btn">Moderate Emissions</button>
+            <button id="high-btn" class="scenario-btn">High Emissions</button>
+        </div>
+        
+        <div class="year-display">Year: <span id="selected-year">2023</span></div>
+        
+        <div class="slider-container">
+            <input type="range" id="year-slider" min="1880" max="2100" value="2023" step="1">
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+        
+        <div class="info-panel">
+            <div class="info-title">About this visualization:</div>
+            <p>This interactive chart shows global temperature anomalies (difference from pre-industrial average) from 1880 to 2023 (historical data), and projections through 2100 under different emissions scenarios:</p>
+            <ul>
+                <li><strong>Low Emissions</strong>: Aggressive climate action (RCP2.6/SSP1-2.6)</li>
+                <li><strong>Moderate Emissions</strong>: Some mitigation efforts (RCP4.5/SSP2-4.5)</li>
+                <li><strong>High Emissions</strong>: Business-as-usual scenario (RCP8.5/SSP5-8.5)</li>
+            </ul>
+            <p>Use the slider to see temperature projections for specific years and explore how different emission paths affect our future climate.</p>
+        </div>
+    </div>
+
+    <script>
+        // Historical data (1880-2023)
+        const historicalData = [
+            -0.16, -0.18, -0.10, -0.20, -0.28, -0.33, -0.31, -0.36, -0.17, -0.10,
+            -0.35, -0.22, -0.27, -0.31, -0.30, -0.23, -0.11, -0.11, -0.26, -0.17,
+            -0.08, -0.15, -0.27, -0.36, -0.46, -0.26, -0.22, -0.38, -0.42, -0.48,
+            -0.43, -0.44, -0.36, -0.34, -0.15, -0.13, -0.34, -0.46, -0.29, -0.27,
+            -0.27, -0.19, -0.28, -0.26, -0.27, -0.22, -0.10, -0.21, -0.20, -0.10,
+            -0.03, 0.13, 0.10, 0.12, 0.18, 0.08, 0.16, 0.26, 0.12, 0.05,
+            0.03, 0.06, -0.02, 0.03, 0.11, -0.06, -0.03, -0.10, -0.11, -0.17,
+            -0.07, -0.09, -0.14, -0.16, -0.09, -0.17, -0.03, 0.02, 0.07, 0.03,
+            -0.08, -0.14, -0.17, -0.07, 0.01, 0.08, 0.05, 0.03, -0.03, -0.03,
+            -0.06, -0.02, 0.05, 0.03, 0.16, 0.06, 0.11, 0.26, 0.32, 0.14,
+            0.31, 0.16, 0.12, 0.18, 0.32, 0.39, 0.27, 0.45, 0.41, 0.22,
+            0.23, 0.32, 0.45, 0.33, 0.46, 0.61, 0.38, 0.39, 0.54, 0.63,
+            0.62, 0.54, 0.68, 0.64, 0.58, 0.66, 0.72, 0.61, 0.65, 0.73,
+            0.62, 0.64, 0.67, 0.73, 0.88, 0.98, 0.93, 0.85, 1.02, 0.99,
+            1.02, 1.13, 1.18, 1.35, 1.29
+        ];
+
+        // Generate years array for historical data (1880-2023)
+        const years = Array.from({length: historicalData.length}, (_, i) => 1880 + i);
+
+        // Projection scenarios (2024-2100)
+        const lowEmissionsProjection = Array.from({length: 77}, (_, i) => {
+            const baseTemp = 1.30; // Starting from 2023 level
+            const yearFactor = i / 76; // 0 to 1 over the period
+            return baseTemp + 0.1 * Math.sin(yearFactor * 5) + yearFactor * 0.2;
+        });
+
+        const moderateEmissionsProjection = Array.from({length: 77}, (_, i) => {
+            const baseTemp = 1.30; // Starting from 2023 level
+            const yearFactor = i / 76; // 0 to 1 over the period
+            return baseTemp + 0.15 * Math.sin(yearFactor * 5) + yearFactor * 1.5;
+        });
+
+        const highEmissionsProjection = Array.from({length: 77}, (_, i) => {
+            const baseTemp = 1.30; // Starting from 2023 level
+            const yearFactor = i / 76; // 0 to 1 over the period
+            return baseTemp + 0.2 * Math.sin(yearFactor * 5) + yearFactor * 3.3;
+        });
+
+        // Future years (2024-2100)
+        const futureYears = Array.from({length: 77}, (_, i) => 2024 + i);
+        
+        // Chart configuration
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        
+        // Create the chart with historical data
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: years,
+                datasets: [{
+                    label: 'Historical Temperature Anomaly (°C)',
+                    data: historicalData,
+                    borderColor: '#2c3e50',
+                    backgroundColor: 'rgba(44, 62, 80, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 5,
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: 'Low Emissions Projection (°C)',
+                    data: Array(historicalData.length).fill(null).concat(lowEmissionsProjection),
+                    borderColor: '#3498db',
+                    backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                    borderWidth: 2,
+                    pointRadius: 0,
+                    pointHoverRadius: 5,
+                    fill: true,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Year',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        ticks: {
+                            callback: function(value, index, values) {
+                                const year = this.getLabelForValue(value);
+                                return year % 20 === 0 ? year : '';
+                            }
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Temperature Anomaly (°C)',
+                            font: {
+                                size: 14,
+                                weight: 'bold'
+                            }
+                        },
+                        suggestedMin: -0.5,
+                        suggestedMax: 5,
+                        grid: {
+                            color: function(context) {
+                                if (context.tick.value === 0) {
+                                    return 'rgba(0, 0, 0, 0.5)';
+                                } else if (context.tick.value === 1.5) {
+                                    return 'rgba(255, 150, 0, 0.5)';
+                                } else if (context.tick.value === 2.0) {
+                                    return 'rgba(255, 0, 0, 0.5)';
+                                }
+                                return 'rgba(0, 0, 0, 0.1)';
+                            },
+                            lineWidth: function(context) {
+                                if (context.tick.value === 0 || 
+                                    context.tick.value === 1.5 || 
+                                    context.tick.value === 2.0) {
+                                    return 2;
+                                }
+                                return 1;
+                            }
+                        }
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                return 'Year: ' + tooltipItems[0].label;
+                            },
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.raw.toFixed(2) + '°C';
+                            }
+                        }
+                    },
+                    legend: {
+                        position: 'bottom'
+                    },
+                    annotation: {
+                        annotations: {
+                            line1: {
+                                type: 'line',
+                                yMin: 1.5,
+                                yMax: 1.5,
+                                borderColor: 'orange',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Paris Agreement (1.5°C)',
+                                    enabled: true
+                                }
+                            },
+                            line2: {
+                                type: 'line',
+                                yMin: 2.0,
+                                yMax: 2.0,
+                                borderColor: 'red',
+                                borderWidth: 2,
+                                label: {
+                                    content: 'Critical Threshold (2.0°C)',
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Year slider functionality
+        const yearSlider = document.getElementById('year-slider');
+        const selectedYear = document.getElementById('selected-year');
+        
+        yearSlider.addEventListener('input', function() {
+            const year = parseInt(this.value);
+            selectedYear.textContent = year;
+            
+            // Update chart to show data up to selected year
+            updateChartToYear(year);
+        });
+        
+        function updateChartToYear(year) {
+            const historicalCutoff = Math.min(year - 1880 + 1, historicalData.length);
+            
+            // Update historical data
+            chart.data.datasets[0].data = historicalData.slice(0, historicalCutoff)
+                .concat(Array(historicalData.length - historicalCutoff).fill(null));
+            
+            // Update projection data if year is beyond historical data
+            if (year >= 2024) {
+                const projectionCutoff = year - 2024 + 1;
+                
+                // For low emissions scenario
+                const lowEmissionsData = Array(historicalData.length).fill(null)
+                    .concat(lowEmissionsProjection.slice(0, projectionCutoff))
+                    .concat(Array(lowEmissionsProjection.length - projectionCutoff).fill(null));
+                
+                // Update the existing projection dataset
+                chart.data.datasets[1].data = lowEmissionsData;
+            } else {
+                // If before projection period, show no projection data
+                chart.data.datasets[1].data = Array(historicalData.length + lowEmissionsProjection.length).fill(null);
+            }
+            
+            chart.update();
+        }
+        
+        // Scenario buttons functionality
+        const lowBtn = document.getElementById('low-btn');
+        const moderateBtn = document.getElementById('moderate-btn');
+        const highBtn = document.getElementById('high-btn');
+        
+        lowBtn.addEventListener('click', function() {
+            setActiveButton(this);
+            updateScenario('low');
+        });
+        
+        moderateBtn.addEventListener('click', function() {
+            setActiveButton(this);
+            updateScenario('moderate');
+        });
+        
+        highBtn.addEventListener('click', function() {
+            setActiveButton(this);
+            updateScenario('high');
+        });
+        
+        function setActiveButton(button) {
+            [lowBtn, moderateBtn, highBtn].forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+        }
+        
+        function updateScenario(scenario) {
+            let projectionData;
+            let color;
+            let label;
+            
+            switch(scenario) {
+                case 'low':
+                    projectionData = lowEmissionsProjection;
+                    color = '#3498db';
+                    label = 'Low Emissions Projection (°C)';
+                    break;
+                case 'moderate':
+                    projectionData = moderateEmissionsProjection;
+                    color = '#f39c12';
+                    label = 'Moderate Emissions Projection (°C)';
+                    break;
+                case 'high':
+                    projectionData = highEmissionsProjection;
+                    color = '#e74c3c';
+                    label = 'High Emissions Projection (°C)';
+                    break;
+            }
+            
+            // Update the projection dataset
+            chart.data.datasets[1].data = Array(historicalData.length).fill(null).concat(projectionData);
+            chart.data.datasets[1].borderColor = color;
+            chart.data.datasets[1].backgroundColor = color.replace(')', ', 0.1)').replace('rgb', 'rgba');
+            chart.data.datasets[1].label = label;
+            
+            // Update the chart to the currently selected year
+            updateChartToYear(parseInt(yearSlider.value));
+        }
+        
+        // Initialize with historical data up to 2023
+        updateChartToYear(2023);
+    </script>
+</body>
+</html>

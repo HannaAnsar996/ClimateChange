@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Climate Change</title>
+<link rel="icon" href="Images/nature.jpg">
+<link rel="stylesheet" type="text/css" href="AboutUsStyles.css">
+</head>
+<body>
+  <div class="container">
+<div class="container">
+  <div id="menuIcon" class="no-animation">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+  <div class="menu-box" id="menuBox" class="no-animation">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="About.html">About</a></li>
+      <li><a href="Causes.html">Causes</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="Prevention.html">Prevention</a></li>
+      <li><a href="climate.html">Earth's Pulse</a></li>
+      <li><a href="Feedback.html">Feedback</a></li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  let menuBox = document.getElementById("menuBox");
+  let menuIcon = document.getElementById("menuIcon");
+
+  menuIcon.onclick = function() {
+    menuBox.classList.toggle("open-menu");
+    menuIcon.classList.toggle("open-menu");
+  };
+</script>
+<style>A {text-decoration: none;} </style><br>
+<div class="fusion-clearfix"></div></div></div></div></div>
+<img src="Images/climate.gif" align="right" height="250px" width="250px">
+<strong>
+<p style="color: #264d00; font-size: 40px;">What is Climate Change?</p>
+</strong>
+<p style="color: #264d00; font-size: 20px;" align="left">Climate change describes a change in the typical weather for a region such as high and low temperatures and amount of rainfall over a long period of time. Scientists have observed that, overall, Earth is warming. In fact, many of the warmest years on record have happened in the past 20 years. This rise in global temperature is sometimes called global warming.Climate change is an urgent global issue that affects every aspect of life on Earth. It refers to the long-term shifts in temperatures and weather patterns, largely driven by human activities such as burning fossil fuels, deforestation, and industrial emissions. These actions increase the concentration of greenhouse gases, trapping heat in the atmosphere and leading to rising global temperatures.
+</p>
+<style>A {text-decoration: none;} </style>
+<br><hr>
+<img src="images/climatepic.gif" align="left" height="250px" width="250px">
+<strong>
+<p style="color: #264d00; font-size: 40px;">How Do We Know Climate is Changing?</p>
+</strong>
+<p style="color: #264d00; font-size: 20px;">Scientists have been observing Earth for a long time. They use NASA satellites and other instruments to collect many types of information about Earth's land, atmosphere, ocean and ice. This information tells us that Earth's climate is getting warmer.These tools collect data on temperature changes, atmospheric composition, ocean conditions, and ice coverage. The evidence is clear—Earth is getting warmer.Some key indicators of climate change include Rising Global Temperatures: Many of the warmest years on record have occurred in the past 20 years, Melting Ice: Glaciers and ice sheets are shrinking, leading to rising sea levels, Extreme Weather: Increased frequency of heatwaves, storms, and unpredictable weather patterns, Ocean Changes: Higher temperatures and acidification are affecting marine life and Impact on Ecosystems: Shifts in plant and animal populations due to changing conditions.</p>
+<br><hr>
+<img src="images/UAE.gif" align="right" height="250px" width="250px">
+<strong>
+<p  style="color: #264d00; font-size: 40px;">Climate change in UAE</p>
+</strong>
+<p style="color: #264d00; font-size: 20px;" align="left">The continuing temperature rise caused by global warming contributes to UAE's water scarcity, drought, rising sea level, and aridity. The countryside of the UAE, characterized with its great arid land, infrequent precipitation, and high temperatures are already facing long-term aridity.The continuing temperature rise caused by global warming contributes to UAE's water scarcity, drought, rising sea level, and aridity. The UAE has a hot desert climate, which is very vulnerable to the effects of climate change and contributes to worsening water scarcity, quality, and water contamination.The majority of the rainfall occurs during the winter months.The UAE is situated in a region extremely vulnerable to the impacts of climate change, such as warmer weather, less precipitation, droughts, higher sea levels and increased frequency of dust and sand storms.</p>
+<br><hr>
+</strong></b>
+</div>
+  <div class="globe-container">
+  <h2 style="color: #264d00; text-align: center;">Climate Change Impact Around the World</h2>
+  <p style="color: #264d00; text-align: center;">Hover over the globe to see how different regions are affected.</p>
+  <img src="Images/globe.png" id="interactiveGlobe" width="300px" height="300px" alt="Climate Change Globe">
+</div>
+<hr>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .chat-container { width: 300px; border: 1px solid #ccc; padding: 10px; }
+        .messages { height: 200px; overflow-y: auto; }
+        .input-box { width: 100%; padding: 5px; }
+    </style>
+
+    </script>
+<script>
+  let affectedAreas = {
+    "North America": "More heatwaves and wildfires.",
+    "South America": "Severe droughts and deforestation.",
+    "Europe": "Increasing floods and extreme heat.",
+    "Africa": "Desertification and unpredictable weather.",
+    "Asia": "Rising sea levels and stronger storms.",
+    "Australia": "Coral bleaching and bushfires.",
+    "Antarctica": "Ice sheet melting and habitat loss."
+  };
+
+  document.getElementById("interactiveGlobe").addEventListener("mousemove", function(event) {
+    let tooltip = document.getElementById("tooltip");
+    let region = Object.keys(affectedAreas)[Math.floor(Math.random() * Object.keys(affectedAreas).length)];
+    tooltip.innerHTML = `<strong>${region}</strong>: ${affectedAreas[region]}`;
+    tooltip.style.top = event.pageY + "px";
+    tooltip.style.left = event.pageX + "px";
+    tooltip.style.display = "block";
+  });
+
+  document.getElementById("interactiveGlobe").addEventListener("mouseleave", function() {
+    document.getElementById("tooltip").style.display = "none";
+  });
+</script>
+
+<style>
+  .globe-container {
+    position: relative;
+    text-align: center;
+  }
+
+  #tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+</style>
+
+<script>
+  let affectedAreas = {
+    "North America": "More heatwaves and wildfires.",
+    "South America": "Severe droughts and deforestation.",
+    "Europe": "Increasing floods and extreme heat.",
+    "Africa": "Desertification and unpredictable weather.",
+    "Asia": "Rising sea levels and stronger storms.",
+    "Australia": "Coral bleaching and bushfires.",
+    "Antarctica": "Ice sheet melting and habitat loss."
+  };
+
+  document.getElementById("interactiveGlobe").addEventListener("mousemove", function(event) {
+    let tooltip = document.getElementById("tooltip");
+    let region = Object.keys(affectedAreas)[Math.floor(Math.random() * Object.keys(affectedAreas).length)];
+    tooltip.innerHTML = `<strong>${region}</strong>: ${affectedAreas[region]}`;
+    tooltip.style.top = event.pageY + "px";
+    tooltip.style.left = event.pageX + "px";
+    tooltip.style.display = "block";
+  });
+
+  document.getElementById("interactiveGlobe").addEventListener("mouseleave", function() {
+    document.getElementById("tooltip").style.display = "none";
+  });
+</script>
+
+<style>
+  .globe-container {
+    position: relative;
+    text-align: center;
+  }
+
+  #tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: none;
+  }
+</style>
+
+<div id="tooltip"></div>
+</body>
+</html>
