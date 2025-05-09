@@ -485,12 +485,30 @@ button:hover {
             background-color: #e74c3c;
             color: white;
         }
-        .info-panel {
-            background-color: #edf2f7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
+
+.info-panel {
+    text-align: left;
+}
+
+.info-panel p {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.info-panel ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.info-panel li {
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.info-title {
+    text-align: left;
+}
         .info-title {
             font-weight: bold;
             margin-bottom: 10px;
