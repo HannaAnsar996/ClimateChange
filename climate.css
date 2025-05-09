@@ -1,7 +1,7 @@
 /* General Reset */
 body {
   font-family: 'Poppins', sans-serif;
-  background: url('images/pulse.jpg') no-repeat center center fixed;
+  background: url('Images/pulse.jpg') no-repeat center center fixed;
   background-size: cover;
   margin: 0;
   padding: 0;
@@ -226,7 +226,7 @@ button:hover {
 #land {
   width: 100%;
   height: 300px;
-  background: url('images/land.jpg') no-repeat center;
+  background: url('Images/land.jpg') no-repeat center;
   background-size: cover;
   position: relative;
   border: 2px solid green;
@@ -240,7 +240,7 @@ button:hover {
   position: absolute;
   width: 150px;
   height: 150px;
-  background: url('images/trees.gif') no-repeat center center;
+  background: url('Images/trees.gif') no-repeat center center;
   background-size: contain;
   animation: popUp 0.3s ease;
 }
@@ -331,12 +331,6 @@ button:hover {
             color: #333;
             font-weight: bold;
             text-align: center;
-        }
-        .info-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-bottom: 20px;
         }
         .info-card {
             background-color: #f9f9f9;
@@ -485,6 +479,7 @@ button:hover {
             background-color: #e74c3c;
             color: white;
         }
+        /* Add just this CSS to align the info panel text */
 
 .info-panel {
     text-align: left;
@@ -509,10 +504,6 @@ button:hover {
 .info-title {
     text-align: left;
 }
-        .info-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
         .year-display {
             text-align: center;
             font-size: 1.2em;
