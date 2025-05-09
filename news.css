@@ -6,7 +6,7 @@
         }
 
         body {
-            background-image: url(Images/news.jpg);
+            background-image: url(images/news.jpg);
   background-repeat: no-repeat; 
   background-attachment: fixed; 
   background-size: cover;

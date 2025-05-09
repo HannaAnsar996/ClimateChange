@@ -231,7 +231,7 @@ body {
 /* Global warming */
 
 .flex--gbwarm .flex__item--left {
-	background-image: url(Images/gbwarm.jpg);
+	background-image: url(images/gbwarm.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -242,7 +242,7 @@ body {
 /* deforestation */
 
 .flex--deforestation .flex__item--left {
-	background-image: url(Images/def.jpg);
+	background-image: url(images/def.jpg);
 }
 
 .flex--deforestation .flex__item--right {
@@ -252,7 +252,7 @@ body {
 /* population */
 
 .flex--population .flex__item--left {
-	background-image: url(Images/indus.jpg);
+	background-image: url(images/indus.jpg);
 }
 
 .flex--population .flex__item--right {
@@ -262,7 +262,7 @@ body {
 /* Industrialization */
 
 .flex--industrialization .flex__item--left {
-	background-image: url(Images/pop.jpg);
+	background-image: url(images/pop.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 }

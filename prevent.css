@@ -106,7 +106,7 @@
 #menuIcon.open-menu .bar:nth-child(3) {
       transform: rotate(-45deg) translate(10.5px, -9px); 
     }
-body { background-image: url('Images/prev.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
+body { background-image: url('images/prev.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: cover;
 }
 .flip-card {
   background-color: transparent;
